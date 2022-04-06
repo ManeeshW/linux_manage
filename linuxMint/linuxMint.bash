@@ -169,6 +169,20 @@ git config --global user.name "ManeeshW"
 git config --global push.default matching
 git config --global core.editor vim
 
+# Installing the Driver(RTL8812BU Chipset) on Your System
+echo ""
+echo -e "${G}Installing the Driver(RTL8812BU Chipset) on Your System ${Z}"
+sudo apt -y install dkms git bc
+git clone https://github.com/fastoe/RTL8812BU.git
+cd RTL8812BU
+cd ..
+VER=$(sed -n 's/\PACKAGE_VERSION="\(.*\)"/\1/p' dkms.conf)
+sudo rsync -rvhP ./ /usr/src/rtl88x2bu-${VER}
+sudo dkms add -m rtl88x2bu -v ${VER}
+sudo dkms build -m rtl88x2bu -v ${VER}
+sudo dkms install -m rtl88x2bu -v ${VER}
+sudo modprobe 88x2bu
+
 ssh-keygen -t rsa -b 4096 -C "maneesh@gwu.edu"
 eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
