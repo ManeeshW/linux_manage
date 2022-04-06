@@ -183,6 +183,12 @@ sudo dkms build -m rtl88x2bu -v ${VER}
 sudo dkms install -m rtl88x2bu -v ${VER}
 sudo modprobe 88x2bu
 
+# diagrams.net
+echo ""
+echo -e "${G}Installing diagrams software${Z}"
+wget https://github.com/jgraph/drawio-desktop/releases/download/v17.2.4/drawio-amd64-17.2.4.deb
+sudo dpkg -i drawio-amd64-17.2.4.deb
+
 ssh-keygen -t rsa -b 4096 -C "maneesh@gwu.edu"
 eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
